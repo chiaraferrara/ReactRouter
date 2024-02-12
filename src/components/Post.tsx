@@ -19,8 +19,7 @@ const { id } = useParams();
   
   return (
     <>
-      <div>Dettaglio Bookmark {id}</div>
-     
+      <div>Dettaglio Bookmark {id}</div>     
         <div key={postDetail.id}>
           <h1>{postDetail.title}</h1>
           <p>{postDetail.body}</p>
