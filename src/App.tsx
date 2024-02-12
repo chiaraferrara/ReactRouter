@@ -10,14 +10,16 @@ function App() {
   const [authenticated, setAuthenticated] = useState(false);
 
 //funzione che verifichi se siamo autenticati, se non siamo autenticati non mostrerà la Home
-// function ProtectedRoute({authenticated}: any){
-//   if(authenticated == true){
-//     return <Navigate to="/"/>;
-//   } else{
-//       return <Navigate to="/login"/>;
-//   }
+function ProtectedRoute({authenticated}: any){
+  if(authenticated){
+    return <Navigate to="/"/>;
+  } else{
+      return <Login/>
+  }
 
-// }
+}
+
+
 
   return (
     <BrowserRouter>
@@ -28,12 +30,14 @@ function App() {
           setAuthenticated: () => setAuthenticated(true),
         }}
       > <Routes> 
-        
+        <Route element={<ProtectedRoute authenticated={authenticated}/>}>
         <Route path="/login" element={<Login/>}/>
-       <Route path="/" element={<Home/>}/>
+       
+        <Route path="/" element={<Home/>}/>
         <Route path="/post/:id" element={<Post/>}/>
-        
+        </Route>
         </Routes>
+
       </MyContext.Provider>
       
     </BrowserRouter>
