@@ -7,36 +7,36 @@ import Post from "./components/Post";
 export const MyContext = createContext({});
 
 function App() {
-  const [authenticated, setAuthenticated] = useState(false);
+  const [authenticated, setAuthenticated] = useState<boolean>(false);
 
-//funzione che verifichi se siamo autenticati, se non siamo autenticati non mostrerà la Home
-// function ProtectedRoute({authenticated}: any){
-//   if(authenticated == true){
-//     return <Navigate to="/"/>;
-//   } else{
-//       return <Navigate to="/login"/>;
-//   }
-
-// }
+  //funzione che verifichi se siamo autenticati, se non siamo autenticati non mostrerà la Home
+  function ProtectedRoute({ authenticated }: any) {
+    if (authenticated == false) {
+      return <Navigate to="/login" replace />;
+    } else {
+      return <Home />;
+    }
+  }
 
   return (
-    <BrowserRouter>
-   
-      <MyContext.Provider
-        value={{
-          authenticated,
-          setAuthenticated: () => setAuthenticated(true),
-        }}
-      > <Routes> 
-        
-        <Route path="/login" element={<Login/>}/>
-       <Route path="/" element={<Home/>}/>
-        <Route path="/post/:id" element={<Post/>}/>
-        
+    <MyContext.Provider
+      value={{
+        authenticated,
+        setAuthenticated,
+      }}
+    >
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" Component={Login} />
+          <Route
+            element={<ProtectedRoute authenticated={authenticated == true} />}
+          >
+            <Route path="/" Component={Home} />
+          </Route>
+          <Route path="/post/:id" Component={Post} />
         </Routes>
-      </MyContext.Provider>
-      
-    </BrowserRouter>
+      </BrowserRouter>
+    </MyContext.Provider>
   );
 }
 

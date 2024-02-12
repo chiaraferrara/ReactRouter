@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { MyContext } from "../App";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, NavLink, Navigate, useNavigate } from "react-router-dom";
 
 function Home(){
     const {authenticated}: any = useContext(MyContext);
@@ -25,18 +25,13 @@ function Home(){
 
     if(!posts) return <div>Loading</div>
     return(
-        <>
-     
+        <>     
       {posts.map((post: any) => (
-        <div key={post.id}>
-          <button
-            onClick={() => {
-              goToPostDetail(post.id)
-            }}
-          >
+        <ul key={post.id}>
+          <li><NavLink to={`post/${post.id}`}>          
             {post.title}
-          </button>
-        </div>
+          </NavLink></li>
+        </ul>
       ))}
     </>
   );
