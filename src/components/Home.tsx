@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { MyContext } from "../App";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 function Home(){
     const {authenticated}: any = useContext(MyContext);
@@ -8,8 +8,15 @@ function Home(){
 
     useEffect(() =>{
         getPosts()
-    })
+    },[]);
 
+    const navigate = useNavigate();
+
+    const goToPostDetail = (id : string) =>{
+        navigate(`post/${id}`)
+    }
+
+  
     const getPosts = async () =>{
         const response = await fetch("https://jsonplaceholder.typicode.com/posts");
         const data = await response.json();
@@ -24,7 +31,7 @@ function Home(){
         <div key={post.id}>
           <button
             onClick={() => {
-              
+              goToPostDetail(post.id)
             }}
           >
             {post.title}
