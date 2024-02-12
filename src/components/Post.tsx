@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
+import { PostWrapper, Wrapper } from "../Style/Style";
 
 function Post() {
   const [postDetail, setPostDetail] = useState<any>([]);
@@ -19,11 +20,12 @@ function Post() {
   return (
     <>
       <NavLink to="/">Go back</NavLink>
-      <div>Dettaglio Bookmark {id}</div>
+      <PostWrapper>
+      <div>Dettaglio Post Numero {id}</div>
       <div key={postDetail.id}>
         <h1>{postDetail.title}</h1>
         <p>{postDetail.body}</p>
-      </div>
+      </div></PostWrapper>
     </>
   );
 }

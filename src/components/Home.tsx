@@ -1,6 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { MyContext } from "../App";
-import { Link, NavLink, Navigate, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import {  PostsWrap, Row, } from "../Style/Style";
+import readmore from "../assets/readmore.svg"
+import { read } from "fs";
 
 function Home(){
     const {authenticated}: any = useContext(MyContext);
@@ -26,13 +29,18 @@ function Home(){
     if(!posts) return <div>Loading</div>
     return(
         <>     
+        <PostsWrap>
+          <h3>Lista dei Post:</h3>
       {posts.map((post: any) => (
+      
         <ul key={post.id}>
+          <Row>
           <li><NavLink to={`post/${post.id}`}>          
-            {post.title}
-          </NavLink></li>
+           {post.title} 
+          </NavLink></li></Row>
         </ul>
       ))}
+      </PostsWrap>
     </>
   );
 }

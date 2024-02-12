@@ -3,6 +3,7 @@ import Login from "./components/Login";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import Post from "./components/Post";
+import './App.css'
 
 export const MyContext = createContext({});
 
