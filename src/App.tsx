@@ -1,25 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { createContext, useState } from "react";
+import Login from "./components/Login";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./components/Home";
+
+export const MyContext = createContext({});
 
 function App() {
+  const [authenticated, setAuthenticated] = useState(false);
+
+//funzione che verifichi se siamo autenticati, se non siamo autenticati non mostrerà la Home
+function ProtectedRoute({authenticated}: any){
+  if(!authenticated){
+
+  }
+}
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+   
+      <MyContext.Provider
+        value={{
+          authenticated,
+          setAuthenticated,
+        }}
+      > <Routes>
+        <Route path="/login" element={<Login/>}/>
+
+        <Route path="/" element={<Home/>}/>
+        <Route path="/post/:id" element={<Post/>}/>
+        </Routes>
+      </MyContext.Provider>
+      
+    </BrowserRouter>
   );
 }
 
