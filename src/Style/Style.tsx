@@ -23,7 +23,8 @@ export const Wrapper = styled.div({
   })
 
   export const Row = styled.div({
-    height: "30px",
+    maxHeight: "50px",
+    margin: "5px",
     display: 'flex',
     flexFlow: 'row wrap',
     justifyContent: 'flex-start'
@@ -50,7 +51,7 @@ export const Wrapper = styled.div({
 
   export const PostsWrap = styled.div({
     margin: 'auto',
-    maxWidth: '50%',
+    maxWidth: '80%',
     padding: '8px',
     marginTop: '2em',
     backgroundColor: '#ffffff',
